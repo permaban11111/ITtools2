@@ -11,4 +11,4 @@ python3.12 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
-ja ogolnie z plocka jestem
+ja ogolnie z plocka jestem 292929299
