@@ -47,6 +47,19 @@ class Tenant(BaseModel):
         assert isinstance(data, dict), "Expected a dictionary of tenants"
         return {key: Tenant(**tenant) for key, tenant in data.items()}
     
+class Bills(BaseModel):
+    ammount: float
+    payment_date: str
+    bill_type: str
+    room_nr:str
+
+    @staticmethod
+    def from_json_file(file_path: str) -> Dict[str,'Bills']:
+        data = None
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        assert isinstance(data, dict), "Expected a dictionary of bills"
+        return {key: Bills(**bill_data) for key, bill_data in data.items()}
 
 class Manager:
     def __init__(self, parameters: Parameters):
@@ -72,4 +85,6 @@ if __name__ == '__main__':
 
     for tenant in manager.tenants.values():
         print(tenant.name, tenant.apartment, tenant.room, tenant.rent_pln, tenant.deposit_pln, tenant.date_agreement_from, tenant.date_agreement_to)
-    
+
+rachunki = Bills.from_json_file("data/bills.json")
+print(rachunki)
